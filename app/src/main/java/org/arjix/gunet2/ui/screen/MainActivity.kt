@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
@@ -22,6 +23,7 @@ import org.arjix.gunet2.ui.screen.NaviBarScreens
 
 import org.arjix.gunet2.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import org.arjix.gunet2.ui.screen.home.CoursesScreen
 
 
@@ -32,6 +34,11 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModel.viewModelScope.launch {
+            org.arjix.gunet2.network.main()
+        }
+
         setContent {
             AppTheme {
                 Surface {
