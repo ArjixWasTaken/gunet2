@@ -22,6 +22,7 @@ import org.arjix.gunet2.ui.screen.NaviBarScreens
 
 import org.arjix.gunet2.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import org.arjix.gunet2.ui.screen.home.CoursesScreen
 
 
 @AndroidEntryPoint
@@ -80,9 +81,12 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
-                // Dashboard
                 composable(Screen.Home.route) {
                     HomeScreen()
+                }
+
+                composable(Screen.Browse.route) {
+                    CoursesScreen()
                 }
             }
         }

@@ -19,9 +19,9 @@ fun BottomNavigation(
     navController: NavHostController,
     items: List<NaviBarScreens>
 ) {
-    val currentRoute = currentRoute(navController)
-
     BottomNavigation {
+        val currentRoute = currentRoute(navController)
+
         items.forEach { screen ->
             BottomNavigationItem(
                 icon = { Icon(

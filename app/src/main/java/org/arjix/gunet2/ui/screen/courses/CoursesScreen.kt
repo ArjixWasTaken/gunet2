@@ -15,8 +15,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import org.arjix.gunet2.R
 
 @Composable
-fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel()
+fun CoursesScreen(
+    viewModel: CoursesViewModel = hiltViewModel()
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),

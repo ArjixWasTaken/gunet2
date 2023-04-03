@@ -11,6 +11,6 @@ sealed class Screen(val route: String) {
 }
 
 sealed class NaviBarScreens(val route: String, @StringRes val resourceId: Int, @DrawableRes val icon: Int) {
-    object Home : NaviBarScreens("Home", R.string.home_route, R.drawable.ic_baseline_home_24)
-    object Browse : NaviBarScreens("Browse", R.string.browse_route, R.drawable.book)
+    object Home : NaviBarScreens(Screen.Home.route, R.string.home_route, R.drawable.ic_baseline_home_24)
+    object Browse : NaviBarScreens(Screen.Browse.route, R.string.browse_route, R.drawable.book)
 }
