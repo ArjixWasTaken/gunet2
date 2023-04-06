@@ -42,17 +42,9 @@ interface GogoAnime {
     fun search(@Query("keyword") keyword: String) : Call<SearchPage>
 }
 
-suspend fun main() {
-    GlobalScope.launch(Dispatchers.IO) {
-        try {
-            val searchPage = createRetrofit().create(GogoAnime::class.java).search("overlord").await()
-            searchPage.results.forEach {
-                println("AAAS: ${it.title}")
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+suspend fun main(): List<String> {
+    val searchPage = createRetrofit().create(GogoAnime::class.java).search("overlord").await()
+    return searchPage.results.map { it.title }
 }
 
 fun createRetrofit(): Retrofit =

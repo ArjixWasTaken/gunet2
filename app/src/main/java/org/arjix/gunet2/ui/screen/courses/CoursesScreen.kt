@@ -16,6 +16,7 @@ import org.arjix.gunet2.R
 
 @Composable
 fun CoursesScreen(
+    items: MutableCollection<String>,
     viewModel: CoursesViewModel = hiltViewModel()
 ) {
     Column(
@@ -23,20 +24,8 @@ fun CoursesScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Greetings
-        val greetings by viewModel.greetingsRes.collectAsState()
-        Text(
-            text = stringResource(id = greetings),
-            style = MaterialTheme.typography.h3
-        )
-
-        Spacer(modifier = Modifier.height(30.dp))
-
-        // Action : Click Me
-        Button(onClick = {
-            viewModel.onClickMeClicked()
-        }) {
-            Text(text = stringResource(id = R.string.action_click_me))
+        items.map {
+            Text(text = it, style = MaterialTheme.typography.h5)
         }
     }
 }
