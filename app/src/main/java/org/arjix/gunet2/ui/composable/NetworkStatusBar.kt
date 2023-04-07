@@ -21,13 +21,15 @@ fun AnimatedVisibilityMark2(visible: Boolean, delayMillis: Int, durationMillis: 
             animationSpec = keyframes {
                 this.delayMillis = delayMillis
                 this.durationMillis = durationMillis
-            }
+            },
+            initialOffsetY = { -it }
         ),
         exit = slideOutVertically(
             animationSpec = keyframes {
                 this.delayMillis = delayMillis
                 this.durationMillis = durationMillis
-            }
+            },
+            targetOffsetY = { -it }
         )
     ){
         content()
@@ -36,7 +38,7 @@ fun AnimatedVisibilityMark2(visible: Boolean, delayMillis: Int, durationMillis: 
 
 @Composable
 fun NetworkStatusBar(hasInternet: Boolean) {
-    AnimatedVisibilityMark2(!hasInternet, 2000, 500) {
+    AnimatedVisibilityMark2(!hasInternet, 500, 500) {
         Text(
             text = if (hasInternet) {"Back online"} else {"No connection"},
             textAlign = TextAlign.Center,

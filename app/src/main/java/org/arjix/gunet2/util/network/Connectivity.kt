@@ -17,7 +17,7 @@ suspend fun isDnsResolvable(): Boolean {
                 to be fair, windows requests for http://www.msftconnecttest.com/connecttest.txt and checks the content
                 but a simple DNS lookup is enough for us, me thinks :^)
             */
-            val address = InetAddress.getByName("www.google.com")
+            val address = InetAddress.getByName("www.msftconnecttest.com")
             !address.hostAddress.isNullOrEmpty()
         } catch (e: UnknownHostException) {
             false
@@ -32,41 +32,4 @@ suspend fun hasNetwork(context: Context): Boolean {
     val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
 
     return activeNetwork.hasCapability(NET_CAPABILITY_VALIDATED) && isDnsResolvable()
-}
-
-fun listenForNetworkChanges(scope: CoroutineScope, context: Context, cb: (Boolean) -> Unit) {
-    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val networks = mutableMapOf<Network, NetworkCapabilities>()
-
-    connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
-        override fun onAvailable(network: Network) {
-            val info = networks.getOrDefault(network, null) ?: connectivityManager.getNetworkCapabilities(network) ?: return
-            if (!networks.containsKey(network)) {
-                networks[network] = info
-            }
-
-            if (!info.hasTransport(TRANSPORT_WIFI) &&
-                !info.hasTransport(TRANSPORT_CELLULAR) &&
-                !info.hasTransport(TRANSPORT_ETHERNET)) return
-
-            cb(true)
-        }
-
-        override fun onUnavailable() {
-            cb(false)
-        }
-
-        override fun onLost(network: Network) {
-            if (!networks.containsKey(network)) return
-
-            val info = networks[network]!!
-            networks.remove(network)
-
-            if (!info.hasTransport(TRANSPORT_WIFI) &&
-                !info.hasTransport(TRANSPORT_CELLULAR) &&
-                !info.hasTransport(TRANSPORT_ETHERNET)) return
-
-            cb(false)
-        }
-    })
 }

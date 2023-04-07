@@ -16,7 +16,6 @@ import org.arjix.gunet2.R
 
 @Composable
 fun CoursesScreen(
-    items: MutableCollection<String>,
     viewModel: CoursesViewModel = hiltViewModel()
 ) {
     Column(
@@ -24,8 +23,6 @@ fun CoursesScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items.map {
-            Text(text = it, style = MaterialTheme.typography.h5)
-        }
+
     }
 }
