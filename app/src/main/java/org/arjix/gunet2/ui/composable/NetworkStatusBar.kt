@@ -43,7 +43,10 @@ fun NetworkStatusBar(hasInternet: Boolean) {
             text = if (hasInternet) {"Back online"} else {"No connection"},
             textAlign = TextAlign.Center,
             modifier=Modifier
-                .background(if (hasInternet) { Color(45, 165, 65) } else { Color.Gray })
+                .background(
+                    if (hasInternet) { Color(45, 165, 65) }
+                    else { Color.Gray }
+                )
                 .fillMaxWidth()
         )
     }

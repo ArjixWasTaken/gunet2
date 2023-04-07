@@ -104,7 +104,7 @@ class MainActivity : ComponentActivity() {
                                 if (loggedIn.value) { Screen.Home.route }
                                 else { Screen.Login.route },
                                 options
-                            ) // Move to dashboard
+                            )
                         }
                     )
                 }

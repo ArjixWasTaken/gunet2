@@ -6,7 +6,5 @@ dependencyResolutionManagement {
     }
 }
 
-
-
-rootProject.name = "greek-university-network-2"
+rootProject.name = "gunet2"
 include ':app'
